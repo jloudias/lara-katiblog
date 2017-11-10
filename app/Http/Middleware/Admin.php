@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Auth;
+use Session;
+
+class Admin
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        // check if authticated user has admin privilages
+        if(!Auth::user()->admin) {
+          Session::flash('info', 'You do not have permissions to perform this action');
+          return redirect()->back();
+        }
+        return $next($request);
+    }
+}

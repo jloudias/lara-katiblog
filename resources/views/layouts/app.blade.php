@@ -84,6 +84,23 @@
                     <a href="{{ route('categories')}}">Categories</a>
                   </li>
                   <li class="list-group-item">
+                    <a href="{{ route('tags')}}">Tags</a>
+                  </li>
+                  @if(Auth::user()->admin)
+                    <li class="list-group-item">
+                      <a href="{{ route('users')}}">Users</a>
+                    </li>
+                    <li class="list-group-item">
+                      <a href="{{ route('user.create')}}">Create new User</a>
+                    </li>
+                  @endif
+                  <li class="list-group-item">
+                    <a href="{{ route('user.profile')}}">My Profile</a>
+                  </li>
+                  <li class="list-group-item">
+                    <a href="{{ route('tag.create')}}">Create Tag</a>
+                  </li>
+                  <li class="list-group-item">
                     <a href="{{ route('posts')}}">All posts</a>
                   </li>
                   <li class="list-group-item">
