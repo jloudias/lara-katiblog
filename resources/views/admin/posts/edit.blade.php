@@ -59,3 +59,18 @@
     </div>
   </div>
 @endsection
+
+@section('styles')
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+@endsection
+
+@section('scripts')
+<!-- include summernote css/js-->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#content').summernote();
+  });
+</script>
+@endsection
