@@ -7,6 +7,7 @@ use App\Setting;
 use App\Category;
 use App\Post;
 use App\Tag;
+use Log;
 
 class FrontendController extends Controller
 {
@@ -43,6 +44,7 @@ class FrontendController extends Controller
     public function category($id) {
 
       $category = Category::find($id);
+      Log::info('Showing category : '.$category);
 
       return view('category')->with('category', $category)
                               ->with('title', $category->name)
