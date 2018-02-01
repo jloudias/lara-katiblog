@@ -8,6 +8,8 @@ use App\Category;
 use App\Post;
 use App\Tag;
 use Session;
+use Illuminate\Support\Facades\Storage;
+
 
 class PostsController extends Controller
 {
@@ -64,13 +66,18 @@ class PostsController extends Controller
         $featured_new_name = time().$featured->getClientOriginalName();
 
         // move to public folder
-        $featured->move('uploads/posts', $featured_new_name);
+        // $featured->move('uploads/posts', $featured_new_name);
+        $path = $featured->store('posts', 's3', 'public');
+        // set to public as its not working with the command ablove
+        Storage::disk('s3')->setVisibility($path, 'public');
+
 
         // $post = new Post;
         $post = Post::create([
           'title' => $request->title,
           'content' => $request->content,
-          'featured' => 'uploads/posts/' . $featured_new_name,
+          'featured' => $path,
+          // 'featured' => 'uploads/posts/' . $featured_new_name,
           'category_id' => $request->category_id,
           'slug' => str_slug($request->title),
           'user_id' => Auth::id()
@@ -81,8 +88,6 @@ class PostsController extends Controller
         Session::flash('success', 'Post created successfully');
 
         return redirect()->back();
-
-        // dd($request->all());
     }
 
     /**

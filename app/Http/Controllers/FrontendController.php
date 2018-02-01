@@ -9,11 +9,19 @@ use App\Post;
 use App\Tag;
 use Log;
 
+// use Illuminate\Support\Facades\Storage;
+
 class FrontendController extends Controller
 {
     //
     public function index() {
       $setting = Setting::first();
+      // debug below
+      // $firstpost = Post::orderBy('created_at', 'desc' )->first();
+      // $myurl = Storage::disk('s3')->url($firstpost->featured);
+      // // $myurl = url($firstpost->featured);
+      // dd($firstpost->featured);
+      //       dd($myurl);
 
       return view('index')
         ->with('title', $setting->site_name)
